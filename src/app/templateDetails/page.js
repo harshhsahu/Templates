@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { Play, Download, Copy, Star, Clock, Users, ChevronRight, CheckCircle, AlertCircle, Settings, Database, Send, Filter, ArrowRight, Code, Eye, Heart, Share2, Bookmark, Globe, Mail, MessageSquare, Calendar, FileText, Zap, BarChart, Shield, Cpu, Webhook, GitBranch, Bot } from 'lucide-react';
 
+
+export const runtime = 'edge'; 
+
 // Icon mapping for dynamic icon selection
 const iconMap = {
   database: Database,
