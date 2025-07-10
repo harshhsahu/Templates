@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Play, Download, Copy, Star, Clock, Users, ChevronRight, CheckCircle, AlertCircle, Settings, Database, Send, Filter, ArrowRight, Code, Eye, Heart, Share2, Bookmark, Globe, Mail, MessageSquare, Calendar, FileText, Zap, BarChart, Shield, Cpu, Webhook, GitBranch, Bot } from 'lucide-react';
 
 
-export const runtime = 'edge'; 
+
 
 // Icon mapping for dynamic icon selection
 const iconMap = {
@@ -30,8 +30,9 @@ const iconMap = {
   users: Users,
   bot:Bot
 };
+export const runtime = 'edge';  
 
-const TemplateDetailsPage = ({ templateData }) => {
+export const TemplateDetailsPage = ({ templateData }) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   // Default template data if none provided
