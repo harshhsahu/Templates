@@ -2,58 +2,55 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const ServiceCard = ({ id, title, description, color }) => {
+const ServiceCard = ({ id, title, description, model= "gpt-4o", service = "openai" }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleUseItClick = async (e) => {
-    e.stopPropagation(); // Prevent card click when button is clicked
+    e.stopPropagation();
     setIsLoading(true);
     
-    // Use window.location.href for full page redirect
     window.location.href = `${process.env.NEXT_PUBLIC_gtwy_url}/new?template_id=${id}`;
     
     setIsLoading(false);
   };
 
   return (
-   <div 
-      className="w-[380px] max-w-full mx-auto mb-4 cursor-pointer transition-all duration-300 hover:scale-[1.02]"
-    >
-      <div className="relative h-68 ml-0 mr-0 sm:mr-10">
-        <span className={`absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-${color}-500 rounded-lg`}></span>
-        <div className={`relative h-full p-4 bg-white border-2 border-${color}-500 rounded-lg flex flex-col`}>
-          {/* Header with logo and menu */}
-          <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-200">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
-              alt="ChatGPT Logo"
-              className="w-8 h-8 rounded-full"
-            />
-            <h2 className="text-lg font-semibold text-gray-800 flex-grow text-center">{title}</h2>
-          </div>
-          
-          {/* Description */}
-          <p className="mb-4 text-gray-600 text-sm line-clamp-2">{description}</p>
-          
-          {/* Button */}
-          <div className="mt-auto">
-            <div className="flex justify-between items-center w-full mt-3">
-              <span className="text-sm text-gray-500">openai</span>
-              <span className="text-sm font-medium text-gray-700">gpt-4o</span>
-              <button
-                className={`px-4 py-2 ${isLoading ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700 active:bg-green-800'} 
-                           text-white text-xs font-bold rounded-lg
-                           transition duration-300
-                           shadow-md hover:shadow-lg`}
-                onClick={handleUseItClick}
-                disabled={isLoading}
-              >
-                {isLoading ? "LOADING..." : "USE IT"}
-              </button>
-            </div>
-          </div>
+    <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
+        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+          <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
         </div>
+        <h3 className="text-lg font-semibold text-gray-900 truncate">{title}</h3>
+      </div>
+      
+      {/* Description */}
+      <p className="text-gray-600 text-sm mb-6 line-clamp-3 leading-relaxed">
+        {description}
+      </p>
+      
+      {/* Footer */}
+      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+        <div className="flex items-center gap-4 text-xs text-gray-500">
+          <span>{service}</span>
+          <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+          <span>{model}</span>
+        </div>
+        
+        <button
+          className={`px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
+            isLoading 
+              ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+              : 'bg-gray-900 text-white hover:bg-gray-800 active:bg-gray-700'
+          }`}
+          onClick={handleUseItClick}
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Use Template"}
+        </button>
       </div>
     </div>
   );
