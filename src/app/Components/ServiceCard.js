@@ -10,8 +10,8 @@ const ServiceCard = ({ id, title, description, model= "gpt-4o", service = "opena
     e.stopPropagation();
     setIsLoading(true);
     
-    window.location.href = `${process.env.NEXT_PUBLIC_gtwy_url}/new?template_id=${id}`;
-    
+    // window.location.href = `${process.env.NEXT_PUBLIC_gtwy_url}/new?template_id=${id}`;
+    router.push(`/templateDetails`);
     setIsLoading(false);
   };
 
